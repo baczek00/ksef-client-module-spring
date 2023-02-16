@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,19 @@ public class SessionServiceImpl implements SessionService {
                 .subscribe(response -> {
                     System.out.println("Response: " + response);
                 });
+    }
+
+    @Override
+    public void initSessionSigned(byte[] request) {
+            webClient
+                    .post()
+                    .uri("/online/Session/InitSigned")
+                    .header("Content-Type", "application/octet-stream")
+                    .body(request, byte[].class)
+                    .exchange()
+                    .subscribe(response -> {
+                        System.out.println("Response: " + response);
+                    });
     }
 
     @Override
