@@ -1,5 +1,6 @@
 package pl.lukaszbaczek.ksefClient.cert;
 
+
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.cert.X509CertificateHolder;
@@ -68,7 +69,7 @@ public abstract class BaseCerificate {
         X509CertificateHolder certHolder = certBuilder.build(contentSigner);
 
         // Konwersja certyfikatu na X509Certificate
-        X509Certificate cert = new JcaX509CertificateConverter().getCertificate(certHolder);
+        X509Certificate cert = new  JcaX509CertificateConverter().getCertificate(certHolder);
         return cert;
     }
 
