@@ -1,5 +1,7 @@
 package pl.lukaszbaczek.ksefClient.cert;
 
+import pl.lukaszbaczek.ksefClient.keystore.KeyStoreGeneratorFile;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,11 +29,14 @@ public class CertificationGenerator {
         signatureKSEF.setName("Łukasz");
         signatureKSEF.setSureName("Bączek");
         signatureKSEF.setSerial("85082109030");
-        signatureKSEF.setPublicKeyFilePath("C:\\Users\\bacze\\Desktop\\publicKey.info");
+        signatureKSEF.setPublicKeyFilePath("C:\\Users\\bacze\\Desktop\\publicKey.pem");
         KeyPair keyPair = signatureKSEF.generateRSAKeyPair();
         X509Certificate cert = signatureKSEF.generateV3Certificate(keyPair);
         cert.checkValidity(new Date());
         cert.verify(keyPair.getPublic());
+
+        KeyStoreGeneratorFile keyStoreGeneratorFile = new KeyStoreGeneratorFile("C:\\Users\\bacze\\Desktop\\keystore.pl2", "KSEF");
+        keyStoreGeneratorFile.saveP12File(cert, "ABC");
         System.out.println("Wygenerowano");
         saveCertToFille(cert);
         System.out.println("Zapisano do pliku");
