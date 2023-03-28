@@ -11,13 +11,11 @@ import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.SecureRandom;
-import java.security.Security;
+import java.security.*;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 import java.util.Date;
@@ -69,7 +67,7 @@ public abstract class BaseCerificate {
         X509CertificateHolder certHolder = certBuilder.build(contentSigner);
 
         // Konwersja certyfikatu na X509Certificate
-        X509Certificate cert = new  JcaX509CertificateConverter().getCertificate(certHolder);
+        X509Certificate cert = new JcaX509CertificateConverter().getCertificate(certHolder);
         return cert;
     }
 
@@ -98,4 +96,5 @@ public abstract class BaseCerificate {
     public void setPeriodDate(Date date) {
         periodTo = date;
     }
+
 }

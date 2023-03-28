@@ -35,7 +35,7 @@ public class CertificationGenerator {
         cert.checkValidity(new Date());
         cert.verify(keyPair.getPublic());
 
-        KeyStoreGeneratorFile keyStoreGeneratorFile = new KeyStoreGeneratorFile("C:\\Users\\bacze\\Desktop\\keystore.pl2", "KSEF");
+        KeyStoreGeneratorFile keyStoreGeneratorFile = new KeyStoreGeneratorFile("C:\\Users\\bacze\\Desktop\\keystore.jks", "KSEF");
         keyStoreGeneratorFile.saveP12File(cert, "ABC");
         System.out.println("Wygenerowano");
         saveCertToFille(cert);
