@@ -5,7 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,20 +16,27 @@ public class SessionServiceImpl implements SessionService {
     private WebClient webClient;
 
     @Override
-    public void authorisationChallenge(ContextAuthRequest contextAuthRequest) {
+    public void authorisationChallenge(ContextAuthRequest contextAuthRequest) throws RuntimeException {
         Map<String, ContextAuthRequest> contextIdentifier = new HashMap<>();
         contextIdentifier.put("contextIdentifier",contextAuthRequest);
 
-        webClient.post().uri("/online/Session/AuthorisationChallenge")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromValue(contextIdentifier))
-                .retrieve()
-                .bodyToMono(String.class)
-                .subscribe(response -> {
-                    System.out.println("Response: " + response);
-                });
-    }
+        try {
+            String response = webClient.post().uri("/online/Session/AuthorisationChallenge")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(BodyInserters.fromValue(contextIdentifier))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
+            System.out.println("Response: " + response);
+        } catch (WebClientResponseException e) {
+            String errorMessage = "Error during authorisation challenge: " + e.getResponseBodyAsString();
+            throw new RuntimeException(errorMessage);
+        } catch (Exception e) {
+            String errorMessage = "Error during authorisation challenge: " + e.getMessage();
+            throw new RuntimeException(errorMessage);
+        }
+    }
     @Override
     public void initSessionSigned(byte[] request) {
             webClient

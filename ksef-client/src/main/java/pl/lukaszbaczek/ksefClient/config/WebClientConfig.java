@@ -7,7 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    private final String apiUrl = "";
+    private final String apiUrl = "https://ksef-test.mf.gov.pl/api";
 
     @Bean
     public WebClient webClient() {
