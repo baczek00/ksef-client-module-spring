@@ -1,10 +1,12 @@
 package pl.lukaszbaczek.ksefClient.interactive.session;
 
-import reactor.core.publisher.Mono;
+import pl.lukaszbaczek.ksefClient.interactive.session.contextAuthRequest.AuthorisationChallengeException;
+import pl.lukaszbaczek.ksefClient.interactive.session.contextAuthRequest.AuthorisationChallengeResponse;
+import pl.lukaszbaczek.ksefClient.interactive.session.contextAuthRequest.ContextAuthRequest;
 
 public interface SessionService {
 
-    void authorisationChallenge(ContextAuthRequest contextAuthRequest);
+    AuthorisationChallengeResponse authorisationChallenge(ContextAuthRequest contextAuthRequest) throws AuthorisationChallengeException;
 
     void initSessionSigned(byte[] request);
 

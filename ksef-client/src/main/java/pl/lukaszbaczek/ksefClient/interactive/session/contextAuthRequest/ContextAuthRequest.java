@@ -1,4 +1,4 @@
-package pl.lukaszbaczek.ksefClient.interactive.session;
+package pl.lukaszbaczek.ksefClient.interactive.session.contextAuthRequest;
 
 import lombok.Data;
 
