@@ -8,6 +8,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import pl.lukaszbaczek.ksefClient.interactive.session.SessionService;
+import pl.lukaszbaczek.ksefClient.interactive.session.SessionServiceImpl;
 import pl.lukaszbaczek.testClientKSEFOpenApi.config.propertiesFile.api.ApiProperties;
 import pl.lukaszbaczek.testClientKSEFOpenApi.service.maven.MavenConfigService;
 
